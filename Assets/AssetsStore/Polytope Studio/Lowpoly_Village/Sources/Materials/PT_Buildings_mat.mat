@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Buildings_mat
   m_Shader: {fileID: 4800000, guid: 255b400e6b8ac644588946664da1ff3f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _GRADIENT_ON
@@ -26,6 +28,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -106,7 +109,7 @@ Material:
     - _Rock2color: {r: 0.20122819, g: 0.28300953, b: 0.3207547, a: 0}
     - _Ropecolor: {r: 0.6037736, g: 0.5810711, b: 0.3389106, a: 1}
     - _Topcolor: {r: 1, g: 0.98013073, b: 0.9386792, a: 1}
-    - _Wood1color: {r: 0.4056604, g: 0.2683544, b: 0.135858, a: 1}
-    - _Wood2color: {r: 0.24528301, g: 0.10263903, b: 0.059006754, a: 1}
+    - _Wood1color: {r: 0.5, g: 0, b: 0, a: 1}
+    - _Wood2color: {r: 0.5188679, g: 0.026044052, b: 0.01713244, a: 1}
     - _Wood3color: {r: 0.2735849, g: 0.1579125, b: 0.04774831, a: 1}
   m_BuildTextureStacks: []
