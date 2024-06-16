@@ -23,6 +23,10 @@ public class Weapon : MonoBehaviour
     public float bulletVelocity = 30; //bullet speed
     public float bulletPrefabLifeTime = 3f; // seconds
 
+    //Muzzle Effect (want player shoot)
+    public GameObject muzzleEffect;
+    private Animator animator;
+
     public enum ShootingMode
     {
         Single,
@@ -36,6 +40,7 @@ public class Weapon : MonoBehaviour
     {
         readyToShoot = true; // because at the begenning player will be ready to shoot
         burstBulletsLeft = bulletsPerBurst;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -63,6 +68,10 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        animator.SetTrigger("RECOIL");
+
+        SoundManager.Instance.shootingSoundM1911.Play();
         
         readyToShoot = false; //when starting shooting, set value to false so that the player won't be able to shoot the second bullet when the first one is not finished
 
