@@ -41,10 +41,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6330754237378670412}
+  - component: {fileID: 145590218508352628}
   - component: {fileID: 8465595535525259729}
   - component: {fileID: 9119935472154832687}
   - component: {fileID: 4298609912078585716}
   - component: {fileID: 6892504503244072991}
+  - component: {fileID: 1240198752551632383}
   m_Layer: 0
   m_Name: AK74
   m_TagString: Untagged
@@ -71,6 +73,27 @@ Transform:
   - {fileID: 1754565759369845901}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: -65, z: 0.1}
+--- !u!65 &145590218508352628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036134047887733174}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.033782434, y: 0.16676849, z: 0.7707257}
+  m_Center: {x: -0.0017576658, y: -0.036212504, z: -0.06259712}
 --- !u!33 &8465595535525259729
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -149,7 +172,7 @@ MonoBehaviour:
   magazineSize: 30
   bulletsLeft: 0
   isReloading: 0
-  spawnPosition: {x: 0.1, y: 1.375, z: 0.825}
+  spawnPosition: {x: 0.1, y: 1.2, z: 0.825}
   spawnRotation: {x: 0, y: 180, z: 0}
   spawnScale: {x: 2, y: 2, z: 2}
   thisWeaponModel: 1
@@ -162,7 +185,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036134047887733174}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4a9344689790d2243ae5ac03ef7ae599, type: 2}
   m_CullingMode: 0
@@ -175,6 +198,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1240198752551632383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036134047887733174}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3152110083859406182
 GameObject:
   m_ObjectHideFlags: 0

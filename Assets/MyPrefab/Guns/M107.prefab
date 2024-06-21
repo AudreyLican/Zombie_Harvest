@@ -115,7 +115,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.14599155, y: -0.52926445, z: 0.09402591, w: 0.8304967}
   m_LocalPosition: {x: 442.847, y: 20.997, z: 250.462}
-  m_LocalScale: {x: 1.2, y: 1.2000002, z: 1.1999999}
+  m_LocalScale: {x: 1.2000002, y: 1.2000003, z: 1.1999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6772026760540574947}
@@ -223,7 +223,7 @@ MonoBehaviour:
   magazineSize: 30
   bulletsLeft: 0
   isReloading: 0
-  spawnPosition: {x: 0.16, y: 1.3, z: 1.058}
+  spawnPosition: {x: 0.16, y: 1.2, z: 1.058}
   spawnRotation: {x: 0, y: -180, z: 0}
   spawnScale: {x: 1.5, y: 1.5, z: 1.5}
   thisWeaponModel: 4

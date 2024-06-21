@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6521588371778386912}
+  - component: {fileID: 6705047906517983525}
   - component: {fileID: 5016364104329457529}
   - component: {fileID: 7381996272185560426}
   - component: {fileID: 2914331201666810521}
   - component: {fileID: 8630996018857147689}
+  - component: {fileID: 579646592915558955}
   m_Layer: 0
   m_Name: Bennelli_M4
   m_TagString: Untagged
@@ -30,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.14599155, y: -0.52926445, z: 0.09402591, w: 0.8304967}
   m_LocalPosition: {x: 442.71, y: 21.25, z: 250}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1935423371040592906}
@@ -38,6 +40,27 @@ Transform:
   - {fileID: 6951044592353371490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: -65, z: 0.1}
+--- !u!65 &6705047906517983525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200604483739358839}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.034349423, y: 0.192321, z: 0.97656226}
+  m_Center: {x: -5.876357e-10, y: -0.060467277, z: 0.00985889}
 --- !u!33 &5016364104329457529
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -116,7 +139,7 @@ MonoBehaviour:
   magazineSize: 8
   bulletsLeft: 0
   isReloading: 0
-  spawnPosition: {x: 0.16, y: 1.294, z: 1.071}
+  spawnPosition: {x: 0.16, y: 1.2, z: 1.071}
   spawnRotation: {x: 0, y: -180, z: 0}
   spawnScale: {x: 2, y: 2, z: 2}
   thisWeaponModel: 3
@@ -129,7 +152,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3200604483739358839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bb8ed862750a6a0449002e018bb5fe97, type: 2}
   m_CullingMode: 0
@@ -142,6 +165,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &579646592915558955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200604483739358839}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6294840794310127841
 GameObject:
   m_ObjectHideFlags: 0
