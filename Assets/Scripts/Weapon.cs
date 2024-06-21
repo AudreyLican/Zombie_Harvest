@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public bool isActiveWeapon;
+
     //Shooting
     public bool isShooting, readyToShoot;
     bool allowReset = true; //allow reset only once
@@ -24,20 +26,28 @@ public class Weapon : MonoBehaviour
     public float bulletVelocity = 30; //bullet speed
     public float bulletPrefabLifeTime = 3f; // seconds
     //Muzzle Effect (when player shoot)
+
     public GameObject muzzleEffect;
-    private Animator animator;
+    internal Animator animator; //internal allow other script to use animator, without making it public in inspector
 
     //Loading
     public float reloadTime;
     public int magazineSize, bulletsLeft;
     public bool isReloading;// keep track is player is reloarding
 
-   public enum WeaponModel
+    //Storing the position of the weapons when use by player
+    public Vector3 spawnPosition;
+    public Vector3 spawnRotation;
+    public Vector3 spawnScale; //TEST weapon change scale when switch
+
+    public enum WeaponModel
     {
         Pistol1911,
         AK74,
         Uzi,
-        Bennelli_M4
+        Bennelli_M4,
+        M107,
+        M249
     }
 
     public WeaponModel thisWeaponModel;
@@ -62,49 +72,54 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        //play empty sound magazine if shooting and weapon empty
-        if (bulletsLeft == 0 && isShooting)
+        if (isActiveWeapon)
         {
-            SoundManager.Instance.emptyMagazineSoundM1911.Play();
-        }
+            //uneable Outline to be active if weapon is Active - forever to avoid bug
+            GetComponent<Outline>().enabled = false;
 
-        //considering the different shooting mode :
+            //play empty sound magazine if shooting and weapon empty
+            if (bulletsLeft == 0 && isShooting)
+            {
+                SoundManager.Instance.emptyMagazineSoundM1911.Play();
+            }
 
-        if(currentShootingMode == ShootingMode.Auto)
-        {
-            //Holding Down Left Mouse Button
-            isShooting = Input.GetKey(KeyCode.Mouse0);
-        }
-        else if (currentShootingMode == ShootingMode.Single ||
-                currentShootingMode == ShootingMode.Burst)
-        {
-            //Clicking Left Mouse Button Once
-            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
+            //considering the different shooting mode :
 
-        //Reloading when player press R
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
-        {
-            Reload();
-        }
+            if (currentShootingMode == ShootingMode.Auto)
+            {
+                //Holding Down Left Mouse Button
+                isShooting = Input.GetKey(KeyCode.Mouse0);
+            }
+            else if (currentShootingMode == ShootingMode.Single ||
+                    currentShootingMode == ShootingMode.Burst)
+            {
+                //Clicking Left Mouse Button Once
+                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
+            }
 
-        //Automatically reload when magazine is empty
-        if (readyToShoot && isShooting == false && isReloading == false && bulletsLeft <=0)
-        {
-            //Reload();
-        }
+            //Reloading when player press R
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
+            {
+                Reload();
+            }
 
+            //Automatically reload when magazine is empty
+            if (readyToShoot && isShooting == false && isReloading == false && bulletsLeft <= 0)
+            {
+                //Reload();
+            }
 
-        if (readyToShoot && isShooting && bulletsLeft > 0)
-        {
-            burstBulletsLeft = bulletsPerBurst;
-            FireWeapon();
-        }
+            if (readyToShoot && isShooting && bulletsLeft > 0)
+            {
+                burstBulletsLeft = bulletsPerBurst;
+                FireWeapon();
+            }
 
-        //updating UI according to the bullet left
-        if (AmmoManager.Instance.ammoDisplay != null)
-        {
-            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft/bulletsPerBurst}/{magazineSize/bulletsPerBurst}";
+            //updating UI according to the bullet left
+            if (AmmoManager.Instance.ammoDisplay != null)
+            {
+                AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+            } 
         }
     }
 
@@ -136,7 +151,7 @@ public class Weapon : MonoBehaviour
         // or (Test : we want rotation bullet if player want to shoot when rotate is camera)
         // GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-        //Poiting the bullet to face the shooting direction
+        //Pointing the bullet to face the shooting direction
         bullet.transform.forward = shootingDirection;
 
         //Shoot the bullet & apply force
