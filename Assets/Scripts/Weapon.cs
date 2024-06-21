@@ -74,10 +74,10 @@ public class Weapon : MonoBehaviour
     {
         if (isActiveWeapon)
         {
-            //uneable Outline to be active if weapon is Active - forever to avoid bug
+            //Debug Outline when weapon isActive = deasable it
             GetComponent<Outline>().enabled = false;
 
-            //play empty sound magazine if shooting and weapon empty
+            //Empty Magazine Sound
             if (bulletsLeft == 0 && isShooting)
             {
                 SoundManager.Instance.emptyMagazineSoundM1911.Play();
