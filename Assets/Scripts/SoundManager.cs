@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     // This is a singleton
     public static SoundManager Instance { get; set; }
 
+    //Weapons
     public AudioSource ShootingChannel;
     
     public AudioClip M1911Shot;
@@ -24,6 +25,11 @@ public class SoundManager : MonoBehaviour
     public AudioSource reloadingSoundM249;
 
     public AudioSource emptyMagazineSoundM1911;
+
+    // Throwables
+    public AudioSource throwablesChannel;
+    public AudioClip grenadeSound;
+    public AudioClip smokeGrenadeSound;
 
     private void Awake()
     {

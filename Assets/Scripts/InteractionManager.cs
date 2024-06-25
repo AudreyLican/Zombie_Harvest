@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * BUG Outline doesn't disappear when shooting, the isActive do not work well
- * In this the isActive doesn't act well when weapon player have weaponand shoot
+ * Fixed
  */
 public class InteractionManager : MonoBehaviour
 {
-    //This signleton, allow to have access to this manager anywhere inside project
+    //This sigleton, allow to have access to this manager anywhere inside project
     public static InteractionManager Instance { get; set; }
 
     public Weapon hoveredWeapon = null;
     public AmmoBox hoveredAmmoBox = null;
+    public Throwable hoveredThrowable = null;
 
 
     private void Awake()
@@ -27,9 +27,13 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
+    /**
+     * Make Interaction with Game Object : Weapon, Ammo, Throwable(grenable, flash, bomb...)
+     * 
+     */
     private void Update()
     {
-        //Check what the player is hitting : weapons or ennemies
+        // Check what the player is hitting
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -74,6 +78,26 @@ public class InteractionManager : MonoBehaviour
                 if (hoveredAmmoBox)
                 {
                     hoveredAmmoBox.GetComponent<Outline>().enabled = false;
+                }
+
+            }
+
+            //Throwable
+            if (objectHitByRaycast.GetComponent<Throwable>())
+            {
+                hoveredThrowable = objectHitByRaycast.gameObject.GetComponent<Throwable>();
+                hoveredThrowable.GetComponent<Outline>().enabled = true;
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    WeaponManager.Instance.PickupThrowable(hoveredThrowable);
+                }
+            }
+            else
+            {
+                if (hoveredThrowable)
+                {
+                    hoveredThrowable.GetComponent<Outline>().enabled = false;
                 }
 
             }

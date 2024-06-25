@@ -26,6 +26,9 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI tacticalAmountUI;
 
     public Sprite emptySlot;
+    public Sprite greySlot;
+
+    public GameObject middleDot;
 
     private void Awake()
     {
@@ -69,6 +72,16 @@ public class HUDManager : MonoBehaviour
             activeWeaponUI.sprite = emptySlot;
             unActiveWeaponUI.sprite = emptySlot;
         }
+
+        if (WeaponManager.Instance.lethalsCount <= 0)
+        {
+            lethalUI.sprite = greySlot;
+        }
+
+        if (WeaponManager.Instance.tacticalsCount <= 0)
+        {
+            tacticalUI.sprite = greySlot;
+        }
     }
 
     private Sprite GetWeaponSprite(Weapon.WeaponModel model)
@@ -76,22 +89,22 @@ public class HUDManager : MonoBehaviour
         switch (model)
         {
             case Weapon.WeaponModel.Pistol1911:
-                return Instantiate(Resources.Load<GameObject>("Pistol1911_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Pistol1911_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.Uzi:
-                return Instantiate(Resources.Load<GameObject>("Uzi_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Uzi_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.AK74:
-                return Instantiate(Resources.Load<GameObject>("AK74_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("AK74_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.M249:
-                return Instantiate(Resources.Load<GameObject>("M249_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("M249_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.M107:
-                return Instantiate(Resources.Load<GameObject>("M107_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("M107_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.Bennelli_M4:
-                return Instantiate(Resources.Load<GameObject>("BenelliM4_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("BenelliM4_Weapon").GetComponent<SpriteRenderer>().sprite;
 
             default:
                 return null;
@@ -103,22 +116,22 @@ public class HUDManager : MonoBehaviour
         switch (model)
         {
             case Weapon.WeaponModel.Pistol1911:
-                return Instantiate(Resources.Load<GameObject>("Pistol_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Pistol_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.Uzi:
-                return Instantiate(Resources.Load<GameObject>("Bullet9mm_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Bullet9mm_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.AK74:
-                return Instantiate(Resources.Load<GameObject>("Rifle_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.Bennelli_M4:
-                return Instantiate(Resources.Load<GameObject>("ShotGun_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("ShotGun_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.M249:
-                return Instantiate(Resources.Load<GameObject>("Rifle_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.M107:
-                return Instantiate(Resources.Load<GameObject>("Sniper_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                return Resources.Load<GameObject>("Sniper_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             default:
                 return null;
@@ -135,5 +148,25 @@ public class HUDManager : MonoBehaviour
         }
         //This will never happen, but we need to return something
         return null;
+    }
+
+    internal void UpdateThrowablesUI()
+    {
+        lethalAmountUI.text = $"{WeaponManager.Instance.lethalsCount}";
+        tacticalAmountUI.text = $"{WeaponManager.Instance.tacticalsCount}";
+
+        switch (WeaponManager.Instance.equippedLethalType)
+        {
+            case Throwable.ThrowableType.Grenade:
+                lethalUI.sprite = Resources.Load<GameObject>("Grenade").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
+
+        switch (WeaponManager.Instance.equippedTacticalType)
+        {
+            case Throwable.ThrowableType.Smoke_Grenade:
+                tacticalUI.sprite = Resources.Load<GameObject>("Smoke_Grenade").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
     }
 }

@@ -8,6 +8,9 @@ public class GlobalReferences : MonoBehaviour
 
     public GameObject bulletImpactEffectPrefab;
 
+    public GameObject grenadeExplosionEffect;
+    public GameObject smokeGrenadeEffect;
+
     //Check if instance is not null
     // This is a singleton
     private void Awake()

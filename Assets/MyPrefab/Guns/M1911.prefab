@@ -4979,7 +4979,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.14599155, y: -0.52926445, z: 0.09402591, w: 0.8304967}
   m_LocalPosition: {x: 444.348, y: 20.9, z: 250.091}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6000001, y: 1.6, z: 1.6000003}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3632272958673753863}
@@ -5026,10 +5026,12 @@ MonoBehaviour:
   shootingDelay: 0.3
   bulletsPerBurst: 1
   burstBulletsLeft: 0
-  spreadIntensity: 0.05
+  spreadIntensity: 0
+  hipSpreadIntensity: 0.4
+  adsSpreadIntensity: 0.04
   bulletPrefab: {fileID: 1734156019326828481, guid: 2a0fa75a390250b488ada67225ad9707, type: 3}
   bulletSpawn: {fileID: 1858586433883470176}
-  bulletVelocity: 30
+  bulletVelocity: 500
   bulletPrefabLifeTime: 3
   muzzleEffect: {fileID: 2278956749427889858}
   reloadTime: 1.5
