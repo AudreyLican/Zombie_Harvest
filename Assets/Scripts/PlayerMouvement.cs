@@ -43,17 +43,17 @@ public class PlayerMouvement : MonoBehaviour
         // Creating the moving vector
         Vector3 move = transform.right * x + transform.forward * z; // (right - red axis, forward - blue axis)
 
-        //Actually moving the player
+        // Actually moving the player
         controller.Move(move * speed * Time.deltaTime);
 
-        //Check if player can jump
+        // Check if player can jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Going up (&& avoid player jumping when he is already in the air)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        //falling down (apply gravity)
+        // falling down (apply gravity)
         velocity.y += gravity * Time.deltaTime;
 
         //Executing the jump
