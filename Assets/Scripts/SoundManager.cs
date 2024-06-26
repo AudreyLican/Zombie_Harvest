@@ -15,14 +15,17 @@ public class SoundManager : MonoBehaviour
     public AudioClip AK74Shot;
     public AudioClip UziShot;
     public AudioClip M107Shot;
-    public AudioClip M249Shot;
+    //public AudioClip M249Shot;
+    public AudioClip M4_8Shot;
+    public AudioClip BenelliM4Shot;
 
     public AudioSource reloadingSoundM1911;
     public AudioSource reloadingSoundAK74;
+    public AudioSource reloadingSoundM4_8;
     public AudioSource reloadingSoundUzi;
     public AudioSource reloadingSoundBennelliM4;
     public AudioSource reloadingSoundM107;
-    public AudioSource reloadingSoundM249;
+    //public AudioSource reloadingSoundM249;
 
     public AudioSource emptyMagazineSoundM1911;
 
@@ -30,6 +33,15 @@ public class SoundManager : MonoBehaviour
     public AudioSource throwablesChannel;
     public AudioClip grenadeSound;
     public AudioClip smokeGrenadeSound;
+
+    // Zombies
+    public AudioSource zombieChannel;
+    public AudioSource zombieChannel2; // avoir conflit between 2 sound that should be heard in the same time
+    public AudioClip zombieWalking;
+    public AudioClip zombieChase;
+    public AudioClip zombieDeath;
+    public AudioClip zombieAttack;
+    public AudioClip zombieHurt;
 
     private void Awake()
     {
@@ -53,17 +65,22 @@ public class SoundManager : MonoBehaviour
             case WeaponModel.AK74:
                 ShootingChannel.PlayOneShot(AK74Shot);
                 break;
+
+            case WeaponModel.M4_8:
+                ShootingChannel.PlayOneShot(M4_8Shot);
+                break;
+
             case WeaponModel.Uzi:
                 ShootingChannel.PlayOneShot(UziShot);
                 break;
             case WeaponModel.Bennelli_M4:
-                ShootingChannel.PlayOneShot(M1911Shot);
+                ShootingChannel.PlayOneShot(BenelliM4Shot);
                 break;
             case WeaponModel.M107:
                 ShootingChannel.PlayOneShot(M107Shot);
                 break;
             case WeaponModel.M249:
-                ShootingChannel.PlayOneShot(M249Shot);
+                //ShootingChannel.PlayOneShot(M249Shot);
                 break;
         }
     }
@@ -78,14 +95,20 @@ public class SoundManager : MonoBehaviour
             case WeaponModel.AK74:
                 reloadingSoundAK74.Play();
                 break;
+
+            case WeaponModel.M4_8:
+                reloadingSoundM4_8.Play();
+                break;
+
             case WeaponModel.Uzi:
-                //reloadingSoundUzi.Play();
+                reloadingSoundUzi.Play();
                 break;
             case WeaponModel.Bennelli_M4:
-                //reloadingSoundBennelli_M4.Play();
+                reloadingSoundBennelliM4.Play();
                 break;
+
             case WeaponModel.M107:
-                //reloadingSoundM107.Play();
+                reloadingSoundM107.Play();
                 break;
             case WeaponModel.M249:
                 //reloadingSoundM249.Play();

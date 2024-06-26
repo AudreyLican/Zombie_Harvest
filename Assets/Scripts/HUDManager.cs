@@ -97,6 +97,9 @@ public class HUDManager : MonoBehaviour
             case Weapon.WeaponModel.AK74:
                 return Resources.Load<GameObject>("AK74_Weapon").GetComponent<SpriteRenderer>().sprite;
 
+            case Weapon.WeaponModel.M4_8:
+                return Resources.Load<GameObject>("M4_8_Weapon").GetComponent<SpriteRenderer>().sprite;
+
             case Weapon.WeaponModel.M249:
                 return Resources.Load<GameObject>("M249_Weapon").GetComponent<SpriteRenderer>().sprite;
 
@@ -122,6 +125,9 @@ public class HUDManager : MonoBehaviour
                 return Resources.Load<GameObject>("Bullet9mm_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.AK74:
+                return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
+
+            case Weapon.WeaponModel.M4_8:
                 return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
 
             case Weapon.WeaponModel.Bennelli_M4:

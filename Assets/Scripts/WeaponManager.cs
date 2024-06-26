@@ -233,6 +233,10 @@ public class WeaponManager : MonoBehaviour
             case Weapon.WeaponModel.AK74:
                 totalRifleAmmo -= bulletsToDecrease;
                 break;
+
+            case Weapon.WeaponModel.M4_8:
+                totalRifleAmmo -= bulletsToDecrease;
+                break;
         }
     }
 
@@ -247,6 +251,12 @@ public class WeaponManager : MonoBehaviour
                 return totalBullet9mmAmmo;
 
             case Weapon.WeaponModel.M249:
+                return totalRifleAmmo;
+
+            case Weapon.WeaponModel.AK74:
+                return totalRifleAmmo;
+
+            case Weapon.WeaponModel.M4_8:
                 return totalRifleAmmo;
 
             case Weapon.WeaponModel.M107:

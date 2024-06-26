@@ -11,6 +11,8 @@ public class GlobalReferences : MonoBehaviour
     public GameObject grenadeExplosionEffect;
     public GameObject smokeGrenadeEffect;
 
+    public GameObject bloodSprayEffect;
+
     //Check if instance is not null
     // This is a singleton
     private void Awake()

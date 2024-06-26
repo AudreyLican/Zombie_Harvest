@@ -57,6 +57,7 @@ public class Weapon : MonoBehaviour
         Uzi,
         Bennelli_M4,
         M107,
+        M4_8,
         M249
     }
 
