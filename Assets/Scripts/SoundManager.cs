@@ -43,6 +43,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip zombieAttack;
     public AudioClip zombieHurt;
 
+    // Player
+    public AudioSource playerChannel;
+    public AudioClip playerDeath;
+    public AudioClip playerHurt;
+
+    public AudioClip gameOverMusic;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,6 +69,7 @@ public class SoundManager : MonoBehaviour
             case WeaponModel.Pistol1911:
                 ShootingChannel.PlayOneShot(M1911Shot);
                 break;
+
             case WeaponModel.AK74:
                 ShootingChannel.PlayOneShot(AK74Shot);
                 break;
@@ -73,12 +81,15 @@ public class SoundManager : MonoBehaviour
             case WeaponModel.Uzi:
                 ShootingChannel.PlayOneShot(UziShot);
                 break;
+
             case WeaponModel.Bennelli_M4:
                 ShootingChannel.PlayOneShot(BenelliM4Shot);
                 break;
+
             case WeaponModel.M107:
                 ShootingChannel.PlayOneShot(M107Shot);
                 break;
+
             case WeaponModel.M249:
                 //ShootingChannel.PlayOneShot(M249Shot);
                 break;
@@ -103,6 +114,7 @@ public class SoundManager : MonoBehaviour
             case WeaponModel.Uzi:
                 reloadingSoundUzi.Play();
                 break;
+
             case WeaponModel.Bennelli_M4:
                 reloadingSoundBennelliM4.Play();
                 break;
