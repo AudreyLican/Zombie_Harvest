@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int bulletDamage;
     private void OnCollisionEnter(Collision objectWeHit)
     {
         if (objectWeHit.gameObject.CompareTag("Target"))
         {
             print("hit " + objectWeHit.gameObject.name + " !");
 
-            createBulletImpactEffect(objectWeHit);
+            CreateBulletImpactEffect(objectWeHit);
 
             Destroy(gameObject); //Destroy bullet when target is touch
         }
@@ -19,13 +20,20 @@ public class Bullet : MonoBehaviour
         {
             print("hit a wall");
 
-            createBulletImpactEffect(objectWeHit);
+            CreateBulletImpactEffect(objectWeHit);
+
+            Destroy(gameObject);
+        }
+
+        if (objectWeHit.gameObject.CompareTag("Enemy"))
+        { 
+            objectWeHit.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
 
             Destroy(gameObject);
         }
     }
 
-    void createBulletImpactEffect(Collision objectWeHit)
+    void CreateBulletImpactEffect(Collision objectWeHit)
     {
         ContactPoint contact = objectWeHit.contacts[0];
 

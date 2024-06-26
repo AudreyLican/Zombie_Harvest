@@ -7,6 +7,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public bool isActiveWeapon;
+    public int weaponDamage;
 
     //Shooting
     [Header("Shooting")]
@@ -152,6 +153,9 @@ public class Weapon : MonoBehaviour
         spreadIntensity = hipSpreadIntensity;
     }
 
+    /**
+     * If bug when shooting on rotation try this code : GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation)
+     */
     private void FireWeapon()
     {
         //decreasing bullet left for each shoot
@@ -186,8 +190,9 @@ public class Weapon : MonoBehaviour
 
         //Instatiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
-        // or (Test : we want rotation bullet if player want to shoot when rotate is camera)
-        // GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
 
         //Pointing the bullet to face the shooting direction
         bullet.transform.forward = shootingDirection;
@@ -214,13 +219,13 @@ public class Weapon : MonoBehaviour
     
     }
 
+     /**
+      * Play reloading sound according to the selected weapon 
+      * old code from single handled each sound : SoundManager.Instance.reloadingSoundM1911.Play();
+      */
     private void Reload()
     {
-        /**
-         * Play reloading sound according to the selected weapon
-         * 
-         * old code from single handled each sound : SoundManager.Instance.reloadingSoundM1911.Play();
-        */
+        
         SoundManager.Instance.PlayReloadSound(thisWeaponModel);
 
         animator.SetTrigger("RELOAD");
