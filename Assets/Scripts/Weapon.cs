@@ -128,7 +128,11 @@ public class Weapon : MonoBehaviour
             //Automatically reload when magazine is empty
             if (readyToShoot && isShooting == false && isReloading == false && bulletsLeft <= 0)
             {
-                Reload();
+                if (WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel) > 0)
+                {
+                    Reload();
+                }
+                
             }
 
             if (readyToShoot && isShooting && bulletsLeft > 0)
