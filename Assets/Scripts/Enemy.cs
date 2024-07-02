@@ -13,10 +13,19 @@ public class Enemy : MonoBehaviour
 
     public bool isDead;
 
+    //Destroy zombie after amount of time
+    private SelfDestroy selfDestroy;
+
     private void Start()
     {
-       animator = GetComponent<Animator>();
-       navAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        navAgent = GetComponent<NavMeshAgent>();
+
+        selfDestroy = GetComponent<SelfDestroy>();
+        if (selfDestroy != null)
+        {
+            selfDestroy.enabled = false;
+        }
     }
 
     public void TakeDamage(int damageAmount)
@@ -25,6 +34,7 @@ public class Enemy : MonoBehaviour
 
         if (HP <= 0)
         {
+            isDead = true;
             int randomValue = Random.Range(0, 2); // 0 or 1
 
             if (randomValue == 0)
@@ -36,10 +46,18 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("DIE2");
             }
             
-            isDead = true;
+            
 
             // Death Sound
             SoundManager.Instance.zombieChannel2.PlayOneShot(SoundManager.Instance.zombieDeath);
+
+            selfDestroy.enabled = true;
+            if (selfDestroy != null)
+            {
+                selfDestroy.timeForDestruction = 15f;
+                StartCoroutine(selfDestroy.DestroySelf(15f));
+                //selfDestroy.StartCoroutine(selfDestroy.DestroySelf(selfDestroy.timeForDestruction)); 
+            }
         }
         else
         {
@@ -57,9 +75,9 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, 2.5f); // Attacking // Stop Attacking
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 18f); // Detection (Start Chasing)
+        Gizmos.DrawWireSphere(transform.position, 30f); // Detection (Start Chasing)
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 21f); // Stop Chasing
+        Gizmos.DrawWireSphere(transform.position, 33f); // Stop Chasing
     }
 }

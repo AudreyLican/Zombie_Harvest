@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class ZombieSpawnController : MonoBehaviour
 {
     public int initialZombiesPerWave = 5;
-    public int currentZombisePerWave;
+    public int currentZombiesPerWave;
 
     public float spawnDelay = 0.5f; // Delay between spawning each zombie in a wave;
 
@@ -29,7 +29,7 @@ public class ZombieSpawnController : MonoBehaviour
 
     private void Start()
     {
-        currentZombisePerWave = initialZombiesPerWave;
+        currentZombiesPerWave = initialZombiesPerWave;
 
         StartNextWave();
     }
@@ -46,7 +46,7 @@ public class ZombieSpawnController : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        for (int i = 0; i < currentZombisePerWave; i++)
+        for (int i = 0; i < currentZombiesPerWave; i++)
         {
             // Generate a random offset within a specified range
             Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
@@ -117,7 +117,7 @@ public class ZombieSpawnController : MonoBehaviour
         inCooldown = false;
         titleWaveOverUI.gameObject.SetActive(false);
 
-        currentZombisePerWave *= 2; // increase number of zombies per wave
+        currentZombiesPerWave *= 2; // increase number of zombies per wave
         StartNextWave();
     }
 }

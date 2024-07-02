@@ -11,7 +11,7 @@ public class SelfDestroy : MonoBehaviour
         StartCoroutine(DestroySelf(timeForDestruction));
     }
 
-    private IEnumerator DestroySelf(float timeForDestruction)
+    internal IEnumerator DestroySelf(float timeForDestruction)
     {
         yield return new WaitForSeconds(timeForDestruction);
 
