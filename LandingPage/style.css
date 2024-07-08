@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Chilanka&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+
+h2, h3, h4 {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 400;
+}
+
+p, a {
+    font-family: "Chilanka";
+}
+
+body {
+    background-color: black;
+}
+/*
+section {
+    height: 100%;
+}*/
+
+/*--NAVBAR--*/
+
+.navbar {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .menu {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.7em;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.navbar .menu a:hover {
+    color: #368C5E;
+}
+
+.navbar .menu h2 {
+    color: red;
+    font-weight: bold;
+}
+
+/*--RESPONSIVE--*/
+
+@media (max-width: 700px){
+    .navbar .menu a {
+        font-size: 0.8em;
+    }
+
+    .navbar .menu h2 {
+        font-size: 1.1em;
+    }
+}
+
+/*-- SECTION 1--*/
+
+.section1 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
+    background-image: url('images/BG\ zombie\ in\ forest.jpg');
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.section1 h1 {
+    font-size: 8em;
+    color : black;
+    text-shadow: 10px 0px 10px #368C5E;
+}
+
+.section1 p {
+    font-size: 3em;
+    color : #C02E2E;
+    text-shadow: 10px 0px 10px #C02E2E;
+    font-weight: bold;
+    margin: 70px 0;
+}
+
+.section1 button {
+    width: 300px;
+    height: 65px;
+    border-radius: 50px;
+    border: none;
+    color : white;
+    font-size: 1.2em;
+    font-weight: 900;
+    background-color: #368C5E;
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px black;
+    letter-spacing: 1.5px;
+}
+
+/*--RESPONSIVE--*/
+
+@media (max-width: 1300px){
+    .section1 h1 {
+        font-size: 6em;
+    }
+}
+
+@media (max-width: 1000px){
+    .section1 {
+        text-align: center;
+        align-items: center;
+}
+    .section1 p {
+        font-size: 1.5em;
+}
+}
+
+/*--ABOUT SECTION--*/
+
+.about .container {
+    display: flex;
+    justify-content: center;
+    margin : 0 auto;
+    max-width: 1500px;
+    padding-top: 90px;
+    gap: 100px;
+}
+
+.about .container .left h3{
+    color: white;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.about .container .left p {
+    color : white;
+    max-width: 500px;
+    margin: 2px 0;
+    font-weight: 400;
+    letter-spacing: 1.1px;
+}
+
+.about .container .right {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.about .container .right p {
+    color : white;
+    max-width: 300px;
+    margin: 30px 0;
+    font-weight: 400;
+    margin: 30px 0 0;
+    letter-spacing: 1.1px;
+}
+
+/*--RESPONSIVE ABOUT SECTION--*/
+
+@media (max-width: 1000px){
+    .about .container{
+        flex-direction: column;
+}
+    .about .container .left {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+}
+
+.about .container .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+}
