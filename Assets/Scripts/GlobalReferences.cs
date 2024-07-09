@@ -13,6 +13,8 @@ public class GlobalReferences : MonoBehaviour
 
     public GameObject bloodSprayEffect;
 
+    public int waveNumber;
+
     //Check if instance is not null
     // This is a singleton
     private void Awake()

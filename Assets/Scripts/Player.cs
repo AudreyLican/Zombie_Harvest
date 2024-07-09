@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -76,6 +77,23 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         gameOverUI.gameObject.SetActive(true);
+
+        // Save the last player survived
+        int wavesurvived = GlobalReferences.Instance.waveNumber;
+
+        if (wavesurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
+        {
+            SaveLoadManager.Instance.SaveHighScore(wavesurvived - 1); // player dead current wave so last wave survived is previous
+        }
+
+        StartCoroutine(ReturnToMainMenu());
+    }
+
+    private IEnumerator ReturnToMainMenu()
+    {
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void OnTriggerEnter(Collider other)

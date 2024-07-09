@@ -117,7 +117,7 @@ public class Throwable : MonoBehaviour
             // Damge over enemies
             if (objectInRange.gameObject.GetComponent<Enemy>())
             {
-                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(100);
+                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(50);
             }
         }
 
