@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public int HP = 100;
+    public int maxHP = 100;
     public GameObject bloodyScreen;
 
     public TextMeshProUGUI playerHealthUI;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (isDead) return; // If already dead, do nothing
+
         HP -= damageAmount;
 
         if (HP <= 0)
@@ -37,6 +40,18 @@ public class Player : MonoBehaviour
             playerHealthUI.text = $"Health: {HP}";
             SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
         }
+    }
+
+    public void RestoreHealth(int healAmount)
+    {
+        HP += healAmount;
+        
+        if (HP > maxHP)
+        {
+            HP = maxHP;
+        }
+        
+        playerHealthUI.text = $"Health: {HP}";
     }
 
     private void PlayerDead()
@@ -69,8 +84,12 @@ public class Player : MonoBehaviour
         {
             if (!isDead)
             {
-                TakeDamage(other.gameObject.GetComponent<ZombieAttackHand>().damage);
-                StartCoroutine(BloddyScreenEffect());
+                var zombie = other.transform.root.GetComponent<Enemy>();
+                if (zombie != null && !zombie.isDead && !isDead)
+                {
+                    TakeDamage(other.gameObject.GetComponent<ZombieAttackHand>().damage);
+                    StartCoroutine(BloddyScreenEffect()); 
+                }
             }
         }
     }

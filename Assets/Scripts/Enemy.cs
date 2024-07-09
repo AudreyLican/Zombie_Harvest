@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (isDead) return; // If already dead, do nothing
+
         HP -= damageAmount;
 
         if (HP <= 0)
@@ -46,16 +48,22 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("DIE2");
             }
             
-            
-
             // Death Sound
             SoundManager.Instance.zombieChannel2.PlayOneShot(SoundManager.Instance.zombieDeath);
+
+            if (navAgent != null)
+            {
+                navAgent.enabled = false;
+            }
+
+            // Disable the collider so it no longer triggers damage to the player
+            GetComponent<Collider>().enabled = false;
 
             selfDestroy.enabled = true;
             if (selfDestroy != null)
             {
-                selfDestroy.timeForDestruction = 15f;
-                StartCoroutine(selfDestroy.DestroySelf(15f));
+                selfDestroy.timeForDestruction = 5f;
+                StartCoroutine(selfDestroy.DestroySelf(selfDestroy.timeForDestruction));
                 //selfDestroy.StartCoroutine(selfDestroy.DestroySelf(selfDestroy.timeForDestruction)); 
             }
         }

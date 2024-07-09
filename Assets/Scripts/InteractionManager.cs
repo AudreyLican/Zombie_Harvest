@@ -14,7 +14,6 @@ public class InteractionManager : MonoBehaviour
     public AmmoBox hoveredAmmoBox = null;
     public Throwable hoveredThrowable = null;
 
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -63,12 +62,13 @@ public class InteractionManager : MonoBehaviour
                 if (hoveredWeapon)
                 {
                     hoveredWeapon.GetComponent<Outline>().enabled = false;
+                    hoveredWeapon = null; // ---- CHECK NULL
                 }
                 
             }
 
             // AmmoBox
-            if (objectHitByRaycast.GetComponent<AmmoBox>())
+            if (objectHitByRaycast != null && objectHitByRaycast.GetComponent<AmmoBox>()) // ---- CHECK NULL
             {
                 // Disable the outline of previously selected item
                 if (hoveredAmmoBox)
@@ -95,7 +95,7 @@ public class InteractionManager : MonoBehaviour
             }
 
             //Throwable
-            if (objectHitByRaycast.GetComponent<Throwable>())
+            if (objectHitByRaycast != null && objectHitByRaycast.GetComponent<Throwable>()) // ---- CHECK NULL
             {
                 // Disable the outline of previously selected item
                 if (hoveredThrowable)
@@ -109,6 +109,12 @@ public class InteractionManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     WeaponManager.Instance.PickupThrowable(hoveredThrowable);
+                    GrenadeGrape grapeGrenade = hoveredThrowable.transform.parent.GetComponent<GrenadeGrape>();
+                    if (grapeGrenade != null)
+                    {
+                        hoveredThrowable.gameObject.SetActive(false); //simulate pickup
+                        grapeGrenade.CheckGrenades();
+                    }
                 }
             }
             else

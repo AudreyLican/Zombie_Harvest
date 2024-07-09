@@ -14,6 +14,7 @@ public class Throwable : MonoBehaviour
 
     bool hasExploded = false;
     public bool hasBeenThrown = false;
+    public bool pickedUp = false;
 
     public enum ThrowableType
     {
@@ -24,9 +25,14 @@ public class Throwable : MonoBehaviour
 
     public ThrowableType throwableType;
 
+    private Rigidbody rb;
+
     private void Start()
     {
         countdown = delay;
+
+        // Enssure the grenade starts as kinematic with gravity disabled to keep it in the air
+        Rigidbody rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -118,3 +124,4 @@ public class Throwable : MonoBehaviour
         
     }
 }
+

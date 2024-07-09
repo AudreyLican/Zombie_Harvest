@@ -283,6 +283,14 @@ public class WeaponManager : MonoBehaviour
                 PickupThrowableAsTactical(Throwable.ThrowableType.Smoke_Grenade);
                 break;
         }
+
+        GrenadeGrape grapeGrenade = throwable.transform.parent.GetComponent<GrenadeGrape>();
+        if (grapeGrenade != null)
+        {
+            grapeGrenade.CheckGrenades();
+        }
+
+        Destroy(throwable.gameObject); // Remove the grenade from the scene after pickup
     }
 
     private void PickupThrowableAsTactical(Throwable.ThrowableType tactical)
@@ -318,8 +326,7 @@ public class WeaponManager : MonoBehaviour
             if (lethalsCount < maxLethals)
             {
                 lethalsCount += 1;
-                Destroy(InteractionManager.Instance.hoveredThrowable.gameObject);
-                HUDManager.Instance.UpdateThrowablesUI();
+                HUDManager.Instance.UpdateThrowablesUI(); // Update the UI to reflect new count
             }
             else
             {
@@ -338,6 +345,10 @@ public class WeaponManager : MonoBehaviour
 
         GameObject throwable = Instantiate(lethalPrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
         Rigidbody rb = throwable.GetComponent<Rigidbody>();
+
+        // Ensure Rigidbody settings are correct for throwing
+        rb.isKinematic = false;
+        rb.useGravity = true;
 
         rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
 

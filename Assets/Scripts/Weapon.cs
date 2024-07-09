@@ -32,8 +32,8 @@ public class Weapon : MonoBehaviour
     public Transform bulletSpawn; //Poistion where the bullet will be instantiate
     public float bulletVelocity = 30; //bullet speed
     public float bulletPrefabLifeTime = 3f; // seconds
-    //Muzzle Effect (when player shoot)
 
+    //Muzzle Effect (when player shoot)
     public GameObject muzzleEffect;
     internal Animator animator; //internal allow other script to use animator, without making it public in inspector
 
