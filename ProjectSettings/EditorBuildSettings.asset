@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: bbbc660184cea9a49871f40ff38fd4c1
+  - enabled: 1
+    path: Assets/Scenes/Neptunia_Island.unity
+    guid: dfbdf04b3c63ee041acce07dd384ce4f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

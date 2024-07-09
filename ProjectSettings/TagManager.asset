@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Waypoints
   - ZombieHand
+  - Grenade
+  - GrapeGrenade
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Water
   - UI
   - WeaponRender
-  - 
+  - Camera
   - 
   - 
   - 
