@@ -51,6 +51,10 @@ public class Enemy : MonoBehaviour
             // Death Sound
             SoundManager.Instance.zombieChannel2.PlayOneShot(SoundManager.Instance.zombieDeath);
 
+            // Stop attack sounds
+            SoundManager.Instance.zombieChannel.Stop();
+            SoundManager.Instance.zombieChannel2.Stop();
+
             if (navAgent != null)
             {
                 navAgent.enabled = false;

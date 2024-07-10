@@ -94,12 +94,14 @@ public class Throwable : MonoBehaviour
             }
         }
     }
-    
+
     private void GrenadeEffect()
-    {
+    {/*/
         // Visual Effect
         GameObject explosionEffect = GlobalReferences.Instance.grenadeExplosionEffect;
-        Instantiate(explosionEffect, transform.position, transform.rotation); //Instantiate visual effect of explosion
+
+        //Instantiate visual effect of explosion
+        Instantiate(explosionEffect, transform.position, transform.rotation); 
 
         //Play Sound
         SoundManager.Instance.throwablesChannel.PlayOneShot(SoundManager.Instance.grenadeSound);
@@ -119,9 +121,33 @@ public class Throwable : MonoBehaviour
             {
                 objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(50);
             }
-        }
+        }*/
 
-        
+        // Visual Effect
+        GameObject explosionEffect = GlobalReferences.Instance.grenadeExplosionEffect;
+        GameObject explosion = Instantiate(explosionEffect, transform.position, transform.rotation);
+        // Instantiate visual effect of explosion
+        Destroy(explosion, 2f); // Ensure the explosion effect is destroyed after some time
+
+        // Play Sound
+        SoundManager.Instance.throwablesChannel.PlayOneShot(SoundManager.Instance.grenadeSound);
+
+        // Physical Effect
+        Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
+        foreach (Collider objectInRange in colliders)
+        {
+            Rigidbody rb = objectInRange.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(explosionForce, transform.position, damageRadius);
+            }
+
+            // Damage enemies
+            if (objectInRange.gameObject.GetComponent<Enemy>())
+            {
+                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(50);
+            }
+        }
     }
 }
 

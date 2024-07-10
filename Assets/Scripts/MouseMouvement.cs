@@ -12,6 +12,7 @@ public class MouseMouvement : MonoBehaviour
     public float topClamp = -90f; //must be negative because when we look up its goes to a negative value
     public float bottomClamp = 90f;
 
+
     // Start is called before the first frame update
     void Start()
     {

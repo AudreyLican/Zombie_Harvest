@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 487392342506980901}
   - component: {fileID: 1176492533999079192}
   - component: {fileID: 7725296743762643416}
+  - component: {fileID: 7454111446675132161}
   m_Layer: 0
   m_Name: Player_Small
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1074658935192871123
 Transform:
   m_ObjectHideFlags: 0
@@ -101,6 +102,24 @@ MonoBehaviour:
   mouseSensitivity: 300
   topClamp: -90
   bottomClamp: 90
+--- !u!114 &7454111446675132161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346672665093868976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029fb13c06f7e4d49aaa853e67657dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 100
+  maxHP: 100
+  bloodyScreen: {fileID: 0}
+  playerHealthUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  isDead: 0
 --- !u!1 &3002042239989573000
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +227,7 @@ GameObject:
   - component: {fileID: 4475979040319388152}
   - component: {fileID: 6964925305798315532}
   - component: {fileID: 2560343997709475260}
+  - component: {fileID: 3159442160722485845}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -303,6 +323,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3159442160722485845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316370283072118389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029fb13c06f7e4d49aaa853e67657dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 100
+  maxHP: 100
+  bloodyScreen: {fileID: 0}
+  playerHealthUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  isDead: 0
 --- !u!1 &5567737520390621251
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +436,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

@@ -10,7 +10,7 @@ public class ZombieSpawnController : MonoBehaviour
     public int initialZombiesPerWave = 5;
     public int currentZombiesPerWave;
 
-    public float spawnDelay = 0.5f; // Delay between spawning each zombie in a wave;
+    public float spawnDelay = 1f; // Delay between spawning each zombie in a wave;
 
     public int currentWave = 0;
     public float waveCooldown = 10.0f; // Time in seconds between waves;
