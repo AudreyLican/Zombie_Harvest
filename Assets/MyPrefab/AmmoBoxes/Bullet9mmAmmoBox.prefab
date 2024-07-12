@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 6318141687608791974}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6894932, y: 0, z: 0, w: 0.7242922}
-  m_LocalPosition: {x: 0, y: 1.416, z: 0}
+  m_LocalPosition: {x: 0, y: 1.661, z: -0.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,8 +126,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.2924527, g: 1, b: 0.41016105, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 0.5161978, g: 0.6289307, b: 0.5349866, a: 1}
+  m_Intensity: 6
   m_Range: 10
   m_SpotAngle: 50
   m_InnerSpotAngle: 5

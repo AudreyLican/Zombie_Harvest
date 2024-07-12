@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     //Destroy zombie after amount of time
     private SelfDestroy selfDestroy;
 
+    // Refere to canvasMark gameobject
+    [SerializeField] public GameObject canvasMark;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -55,6 +58,12 @@ public class Enemy : MonoBehaviour
             SoundManager.Instance.zombieChannel.Stop();
             SoundManager.Instance.zombieChannel2.Stop();
 
+            // Disable canvasMark
+            if (canvasMark != null)
+            {
+                canvasMark.SetActive(false);
+            }
+
             if (navAgent != null)
             {
                 navAgent.enabled = false;
@@ -68,7 +77,6 @@ public class Enemy : MonoBehaviour
             {
                 selfDestroy.timeForDestruction = 5f;
                 StartCoroutine(selfDestroy.DestroySelf(selfDestroy.timeForDestruction));
-                //selfDestroy.StartCoroutine(selfDestroy.DestroySelf(selfDestroy.timeForDestruction)); 
             }
         }
         else

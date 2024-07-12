@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +18,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        playerHealthUI.text = $"Health: {HP}";
+        if (playerHealthUI != null)
+        {
+            playerHealthUI.text = $"Health: {HP}";
+        }
+        else
+        {
+            Debug.LogError("PlayerHealthUI is not assigned.");
+        }
     }
 
     public void TakeDamage(int damageAmount)
@@ -30,60 +36,127 @@ public class Player : MonoBehaviour
 
         if (HP <= 0)
         {
-            print("Player Dead");
+            Debug.Log("Player Dead");
             PlayerDead();
             isDead = true;
         }
         else
         {
-            print("Player Hit");
+            Debug.Log("Player Hit");
             StartCoroutine(BloddyScreenEffect());
-            playerHealthUI.text = $"Health: {HP}";
-            SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
+            if (playerHealthUI != null)
+            {
+                playerHealthUI.text = $"Health: {HP}";
+            }
+            else
+            {
+                Debug.LogError("PlayerHealthUI is not assigned.");
+            }
+            if (SoundManager.Instance != null && SoundManager.Instance.playerChannel != null)
+            {
+                SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
+            }
+            else
+            {
+                Debug.LogError("SoundManager or playerChannel is not assigned.");
+            }
         }
     }
 
     public void RestoreHealth(int healAmount)
     {
         HP += healAmount;
-        
+
         if (HP > maxHP)
         {
             HP = maxHP;
         }
-        
-        playerHealthUI.text = $"Health: {HP}";
+
+        if (playerHealthUI != null)
+        {
+            playerHealthUI.text = $"Health: {HP}";
+        }
+        else
+        {
+            Debug.LogError("PlayerHealthUI is not assigned.");
+        }
     }
 
     private void PlayerDead()
     {
-        SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerDeath);
+        if (SoundManager.Instance != null && SoundManager.Instance.playerChannel != null)
+        {
+            SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerDeath);
+            SoundManager.Instance.playerChannel.clip = SoundManager.Instance.gameOverMusic; // to get delay, before playing the music
+            SoundManager.Instance.playerChannel.PlayDelayed(2f);
+        }
+        else
+        {
+            Debug.LogError("SoundManager or playerChannel is not assigned.");
+        }
 
-        SoundManager.Instance.playerChannel.clip = SoundManager.Instance.gameOverMusic; // to get delay, before playing the music
-        SoundManager.Instance.playerChannel.PlayDelayed(2f);
-
-        GetComponent<MouseMouvement>().enabled = false;
-        GetComponent<PlayerMouvement>().enabled = false;
+        var mouseMovement = GetComponent<MouseMouvement>();
+        if (mouseMovement != null) mouseMovement.enabled = false;
+        var playerMovement = GetComponent<PlayerMouvement>();
+        if (playerMovement != null) playerMovement.enabled = false;
 
         // Dying Animation
-        GetComponentInChildren<Animator>().enabled = true;
-        playerHealthUI.gameObject.SetActive(false);
+        var animator = GetComponentInChildren<Animator>();
+        if (animator != null) animator.enabled = true;
+        if (playerHealthUI != null)
+        {
+            playerHealthUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("PlayerHealthUI is not assigned.");
+        }
 
-        GetComponent<ScreenFader>().StartFade();
+        var screenFader = GetComponent<ScreenFader>();
+        if (screenFader != null)
+        {
+            screenFader.StartFade();
+        }
+        else
+        {
+            Debug.LogError("ScreenFader is not assigned.");
+        }
+
         StartCoroutine(ShowGameOverUI());
     }
 
     private IEnumerator ShowGameOverUI()
     {
         yield return new WaitForSeconds(1f);
-        gameOverUI.gameObject.SetActive(true);
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("GameOverUI is not assigned.");
+        }
 
         // Save the last player survived
-        int wavesurvived = GlobalReferences.Instance.waveNumber;
-
-        if (wavesurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
+        if (GlobalReferences.Instance != null)
         {
-            SaveLoadManager.Instance.SaveHighScore(wavesurvived - 1); // player dead current wave so last wave survived is previous
+            int wavesurvived = GlobalReferences.Instance.waveNumber;
+            if (SaveLoadManager.Instance != null)
+            {
+                if (wavesurvived - 1 > SaveLoadManager.Instance.LoadHighScore())
+                {
+                    SaveLoadManager.Instance.SaveHighScore(wavesurvived - 1); // player dead current wave so last wave survived is previous
+                }
+            }
+            else
+            {
+                Debug.LogError("SaveLoadManager is not assigned.");
+            }
+        }
+        else
+        {
+            Debug.LogError("GlobalReferences is not assigned.");
         }
 
         StartCoroutine(ReturnToMainMenu());
@@ -91,8 +164,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator ReturnToMainMenu()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(4f);
 
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -105,8 +179,16 @@ public class Player : MonoBehaviour
                 var zombie = other.transform.root.GetComponent<Enemy>();
                 if (zombie != null && !zombie.isDead && !isDead)
                 {
-                    TakeDamage(other.gameObject.GetComponent<ZombieAttackHand>().damage);
-                    StartCoroutine(BloddyScreenEffect()); 
+                    var zombieAttackHand = other.gameObject.GetComponent<ZombieAttackHand>();
+                    if (zombieAttackHand != null)
+                    {
+                        TakeDamage(zombieAttackHand.damage);
+                        StartCoroutine(BloddyScreenEffect());
+                    }
+                    else
+                    {
+                        Debug.LogError("ZombieAttackHand component is not found on the zombie hand.");
+                    }
                 }
             }
         }
@@ -114,43 +196,55 @@ public class Player : MonoBehaviour
 
     private IEnumerator BloddyScreenEffect()
     {
-        if (bloodyScreen.activeInHierarchy == false)
+        if (bloodyScreen != null)
         {
-            bloodyScreen.SetActive(true);
+            if (bloodyScreen.activeInHierarchy == false)
+            {
+                bloodyScreen.SetActive(true);
+            }
+
+            // --- Fade Effect --- //
+            var image = bloodyScreen.GetComponentInChildren<Image>();
+            if (image != null)
+            {
+                // Set the initial alpha value to 1 (fully visible).
+                Color startColor = image.color;
+                startColor.a = 1f;
+                image.color = startColor;
+
+                float duration = 2f;
+                float elapsedTime = 0f;
+
+                while (elapsedTime < duration)
+                {
+                    // Calculate the new alpha value using Lerp.
+                    float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+
+                    // Update the color with the new alpha value.
+                    Color newColor = image.color;
+                    newColor.a = alpha;
+                    image.color = newColor;
+
+                    // Increment the elapsed time.
+                    elapsedTime += Time.deltaTime;
+
+                    yield return null; // Wait for the next frame.
+                }
+            }
+            else
+            {
+                Debug.LogError("Image component is not found in bloodyScreen.");
+            }
+            // --- end Fade effect --- //
+
+            if (bloodyScreen.activeInHierarchy)
+            {
+                bloodyScreen.SetActive(false);
+            }
         }
-
-        // --- Fade Effect --- //
-
-        var image = bloodyScreen.GetComponentInChildren<Image>();
-
-        // Set the initial alpha value to 1 (fully visible).
-        Color startColor = image.color;
-        startColor.a = 1f;
-        image.color = startColor;
-
-        float duration = 2f;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
+        else
         {
-            // Calculate the new alpha value using Lerp.
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
-
-            // Update the color with the new alpha value.
-            Color newColor = image.color;
-            newColor.a = alpha;
-            image.color = newColor;
-
-            // Increment the elapsed time.
-            elapsedTime += Time.deltaTime;
-
-            yield return null; ; // Wait for the next frame.
-        }
-        // --- end Fade effect --- //
-
-        if (bloodyScreen.activeInHierarchy)
-        {
-            bloodyScreen.SetActive(false);
+            Debug.LogError("BloodyScreen is not assigned.");
         }
     }
 }
